@@ -4,7 +4,7 @@
 
 EHRiva is an AI platform that deploys agents across hospital workflows — clinical
 procedure agents, electronic health record (EHR) analytics agents, and hospital operations agents — built
-evaluation-first, multilingual, and privacy-first (GDPR / KVKK).
+evaluation-first, multilingual, and privacy-first (GDPR).
 
 - 🌐 **Website:** https://ehriva.com
 - ✉️ **Contact:** hello@ehriva.com
@@ -24,7 +24,7 @@ One data layer feeds all three families; every agent keeps a human in the loop.
 
 - **Evaluation-first** — every agent is gated on clinician-curated tasks before deployment
 - **Multilingual** — clinical NLP core designed for multiple languages and terminologies
-- **Privacy by design** — GDPR-aligned, KVKK-compliant, on-prem/private-cloud deployment
+- **Privacy by design** — GDPR-aligned, on-prem/private-cloud deployment
   option
 
 ## Founders
