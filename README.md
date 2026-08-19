@@ -51,6 +51,6 @@ Pages** (repo `ehriva/ehriva.com`).
 
 ## Status
 
-🚧 Founding stage — incorporating (Delaware C-Corp + Turkish operating subsidiary),
+🚧 Founding stage — incorporating (Delaware C-Corp + local operating entities),
 applying to the Google for Startups Accelerator (MENA & Turkey). Hospitals and
 partners: join the pilot waitlist at [ehriva.com](https://ehriva.com).
