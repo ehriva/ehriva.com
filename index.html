@@ -43,7 +43,8 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 18px 24px; max-width: 1120px; margin: 0 auto;
     }
-    .logo { display: flex; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 11px; }
+    .logo-text { font-family: "Baskerville", "Times New Roman", serif; font-weight: 700; font-size: 23px; color: var(--ink); letter-spacing: -.01em; line-height: 1; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; margin-left: 26px; }
     .nav-links a:hover { color: var(--blue); }
     @media (max-width: 640px) { .nav-links a { margin-left: 14px; font-size: 13.5px; } }
@@ -172,7 +173,7 @@
 <body>
 
   <nav>
-    <a class="logo" href="/"><img src="/ehriva.png" alt="EHRiva" style="height:34px;width:auto;"></a>
+    <a class="logo" href="/"><img src="/ehriva.png" alt="EHRiva" style="height:34px;width:auto;"><span class="logo-text">EHRiva</span></a>
     <div class="nav-links">
       <a href="#platform">Platform</a>
       <a href="#how">How it works</a>
