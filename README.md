@@ -1,5 +1,7 @@
 # EHRiva
 
+![EHRiva banner](assets/banner-github.png)
+
 **From EHR data to agentic action.**
 
 EHRiva is an AI platform that deploys agents across hospital workflows — clinical
