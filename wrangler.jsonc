@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ehriva-waitlist",
+  "main": "worker-waitlist.js",
+  "compatibility_date": "2026-08-15",
+  "kv_namespaces": [
+    { "binding": "WAITLIST", "id": "8bbcb84baa0f4f54871378a052727d17" }
+  ],
+  "routes": [
+    { "pattern": "ehriva.com/api/*", "zone_name": "ehriva.com" }
+  ]
+}
