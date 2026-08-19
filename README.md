@@ -1,8 +1,8 @@
-# Ehriva
+# EHRiva
 
 **From EHR data to agentic action.**
 
-Ehriva is an AI platform that deploys agents across hospital workflows — clinical
+EHRiva is an AI platform that deploys agents across hospital workflows — clinical
 procedure agents, EHR analytics agents, and hospital operations agents — built
 evaluation-first, multilingual, and privacy-first (GDPR / KVKK).
 
@@ -20,7 +20,7 @@ evaluation-first, multilingual, and privacy-first (GDPR / KVKK).
 
 One data layer feeds all three families; every agent keeps a human in the loop.
 
-## Why Ehriva
+## Why EHRiva
 
 - **Evaluation-first** — every agent is gated on clinician-curated tasks before deployment
 - **Multilingual** — clinical NLP core designed for multiple languages and terminologies
