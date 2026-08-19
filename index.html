@@ -429,7 +429,8 @@
 
   <script>
     // Waitlist — posts to the Cloudflare Pages Function (functions/api/waitlist.js).
-    // Works even before the KV binding is configured (degrades gracefully).
+    // If the API is unreachable (e.g., previewing the file locally), it falls back
+    // to a pre-filled email so no lead is ever lost.
     const wlForm = document.getElementById('waitlist-form');
     const wlStatus = document.getElementById('form-status');
     wlForm.addEventListener('submit', async (e) => {
@@ -442,13 +443,20 @@
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify({ email })
         });
-        const data = await res.json();
-        wlStatus.textContent = data.ok
-          ? '✓ ' + (data.message || 'You are on the list.')
-          : '✗ ' + (data.error || 'Please try again.');
-        if (data.ok) wlForm.reset();
+        const data = await res.json().catch(() => null);
+        if (data && data.ok) {
+          wlStatus.textContent = '✓ ' + (data.message || 'You are on the list.');
+          wlForm.reset();
+        } else if (res.status === 404) {
+          // Function not deployed — fall back to email so the lead is kept
+          wlStatus.textContent = '✗ Waitlist service not live yet — opening email…';
+          window.location.href = 'mailto:hello@ehriva.com?subject=' + encodeURIComponent('EHRiva waitlist') + '&body=' + encodeURIComponent('Please add me to the pilot waitlist.\n\nEmail: ' + email);
+        } else {
+          wlStatus.textContent = '✗ ' + ((data && data.error) || 'Please try again, or email hello@ehriva.com');
+        }
       } catch (err) {
-        wlStatus.textContent = '✗ Please try again, or email hello@ehriva.com';
+        wlStatus.textContent = '✗ Service unreachable — opening email instead…';
+        window.location.href = 'mailto:hello@ehriva.com?subject=' + encodeURIComponent('EHRiva waitlist') + '&body=' + encodeURIComponent('Please add me to the pilot waitlist.\n\nEmail: ' + email);
       }
     });
   </script>
