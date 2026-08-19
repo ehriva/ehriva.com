@@ -1,44 +1,46 @@
-# Deployment — Cloudflare Pages
+# Deployment — EHRiva (actual setup, updated Aug 20, 2026)
 
-Deploy notes for the `ehriva/ehriva.com` landing page. Internal ops doc (not shown on
-the repo front page — README.md is the public one).
+Internal ops doc (not shown on the repo front page — README.md is the public one).
 
-## Pipeline
+## Reality check: the site runs on a Worker, not Pages
 
-1. Push to `main` → Cloudflare Pages auto-builds and deploys.
-   - Framework preset: **None** · Build command: *(empty)* · Output directory: `/`
-2. Preview deployments are generated automatically for PRs.
+- The static site is deployed as the Cloudflare Worker **`ehriva-com`** attached to the
+  **custom domain `ehriva.com`** (created in the dashboard / via wrangler).
+- The waitlist is a **separate Worker `ehriva-waitlist`** on the route
+  **`ehriva.com/api/*`**, backed by the KV namespace **`WAITLIST`**
+  (`8bbcb84b…d17`). Zone routes take precedence over the custom-domain Worker, so
+  `/api/*` reaches the waitlist while everything else hits the site Worker.
 
-## One-time Cloudflare setup
+## Waitlist worker — deploy & config
 
-1. **Add the zone:** Cloudflare dashboard → **Add a site** → `ehriva.com` (Free plan).
-   Cloudflare shows two nameservers — update them at the registrar where ehriva.com was
-   bought. Propagation is usually 10–60 min.
-2. **Connect Pages:** **Workers & Pages → Create → Pages → Connect to Git** → authorize
-   GitHub → select `ehriva/ehriva.com` → settings as above → **Deploy**.
-3. **Custom domains:** in the Pages project → **Custom domains** → add `ehriva.com`
-   **and** `www.ehriva.com` (Cloudflare creates the DNS records; the www→apex redirect
-   in `_redirects` then kicks in).
-4. **Email (free):** **Email → Email Routing** → enable → create `hello@ehriva.com` →
-   forward to a personal inbox. (Google Workspace optional later for calendar/drives.)
-5. **Waitlist form:** the form in `index.html` posts to Formspree — create a free form
-   at formspree.io and replace `YOUR_FORM_ID`, or swap in a Cloudflare Worker endpoint.
+Config: `wrangler.jsonc` (name `ehriva-waitlist`, main `worker-waitlist.js`,
+KV binding `WAITLIST`, route `ehriva.com/api/*`).
 
-## Waitlist endpoint (Pages Function — Workers runtime)
+```bash
+npx wrangler deploy          # from ehriva-site/
+npx wrangler tail --name ehriva-waitlist
+```
 
-The form on the site posts to `/api/waitlist` (see `functions/api/waitlist.js`). It
-uses a **KV namespace bound as `WAITLIST`** on the Pages project:
+Endpoints (live):
+- `GET  https://ehriva.com/api/waitlist` → `{"ok":true,"service":"ehriva-waitlist","signups":N}`
+- `POST https://ehriva.com/api/waitlist` `{email, org?}` → stores in KV
 
-1. Cloudflare dashboard → **Workers & Pages → KV** → **Create a namespace** →
-   name it `WAITLIST`.
-2. Pages project → **Settings → Functions → KV namespace bindings** → **Add
-   binding** → Variable name: `WAITLIST` → select the namespace → **Save**.
-3. Redeploy (push to `main` or use the dashboard's **Retry deployment**).
+Signups live in KV under `waitlist:` keys; view/delete:
 
-Without the binding the endpoint still responds (gracefully) but doesn't persist —
-signups are only stored once the binding is set. Check counts: `GET /api/waitlist`.
+```bash
+npx wrangler kv key list   --namespace-id 8bbcb84baa0f4f54871378a052727d17
+npx wrangler kv key delete --namespace-id 8bbcb84baa0f4f54871378a052727d17 "<key>"
+```
 
-## Future
+## Static site updates
 
-- When `ehriva.ai` is registered, add it as a second custom domain on this project and
-  uncomment the `ehriva.ai/*` redirect in `_redirects`.
+The site Worker (`ehriva-com`) was created outside this repo's automation — pushing to
+GitHub does **not** redeploy it. To update the live site, redeploy the Worker with the
+repo contents (or via the dashboard's Quick Edit). **TODO: wire the site Worker to
+auto-deploy from `main`** (e.g., Workers Builds / CI), or migrate to Pages + Git
+integration if preferred.
+
+## Old Pages notes (superseded)
+
+Cloudflare Pages was never actually used for ehriva.com. The original Pages steps are
+stored in git history; the `_redirects` file is inert on Workers (harmless).
