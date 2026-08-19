@@ -1,0 +1,6 @@
+# Redirect www → apex (works once www.ehriva.com is added as a custom domain on the Pages project)
+www.ehriva.com/*  https://ehriva.com/:splat  301
+
+# When you own ehriva.ai and add it as a custom domain on this Pages project,
+# uncomment to redirect it to the main site:
+# ehriva.ai/*  https://ehriva.com/:splat  301
