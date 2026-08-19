@@ -24,6 +24,20 @@ the repo front page — README.md is the public one).
 5. **Waitlist form:** the form in `index.html` posts to Formspree — create a free form
    at formspree.io and replace `YOUR_FORM_ID`, or swap in a Cloudflare Worker endpoint.
 
+## Waitlist endpoint (Pages Function — Workers runtime)
+
+The form on the site posts to `/api/waitlist` (see `functions/api/waitlist.js`). It
+uses a **KV namespace bound as `WAITLIST`** on the Pages project:
+
+1. Cloudflare dashboard → **Workers & Pages → KV** → **Create a namespace** →
+   name it `WAITLIST`.
+2. Pages project → **Settings → Functions → KV namespace bindings** → **Add
+   binding** → Variable name: `WAITLIST` → select the namespace → **Save**.
+3. Redeploy (push to `main` or use the dashboard's **Retry deployment**).
+
+Without the binding the endpoint still responds (gracefully) but doesn't persist —
+signups are only stored once the binding is set. Check counts: `GET /api/waitlist`.
+
 ## Future
 
 - When `ehriva.ai` is registered, add it as a second custom domain on this project and

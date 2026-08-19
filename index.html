@@ -243,12 +243,11 @@
       <h2>We're piloting with hospitals now</h2>
       <p class="lede">Join the waitlist — hospitals, clinicians, researchers, and
         partners welcome.</p>
-      <!-- Replace YOUR_FORM_ID with a free Formspree form id (https://formspree.io),
-           or point the form anywhere you like. Alternatively just email us. -->
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <form id="waitlist-form">
         <input type="email" name="email" placeholder="you@hospital.org" required>
         <button class="btn btn-primary" type="submit">Notify me</button>
       </form>
+      <p id="form-status" class="fineprint"></p>
       <p class="fineprint">Or email <a href="mailto:hello@ehriva.com">hello@ehriva.com</a>
         · © 2026 Ehriva · <a href="https://github.com/ehriva" target="_blank" rel="noopener">GitHub</a></p>
     </div>
@@ -257,6 +256,32 @@
   <footer>
     <div class="wrap">© 2026 Ehriva — from EHR data to agentic action.</div>
   </footer>
+
+  <script>
+    // Waitlist — posts to the Cloudflare Pages Function (functions/api/waitlist.js).
+    // Works even before the KV binding is configured (degrades gracefully).
+    const wlForm = document.getElementById('waitlist-form');
+    const wlStatus = document.getElementById('form-status');
+    wlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = wlForm.email.value.trim();
+      wlStatus.textContent = 'Submitting…';
+      try {
+        const res = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        wlStatus.textContent = data.ok
+          ? '✓ ' + (data.message || 'You are on the list.')
+          : '✗ ' + (data.error || 'Please try again.');
+        if (data.ok) wlForm.reset();
+      } catch (err) {
+        wlStatus.textContent = '✗ Please try again, or email hello@ehriva.com';
+      }
+    });
+  </script>
 
 </body>
 </html>

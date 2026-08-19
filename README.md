@@ -43,6 +43,7 @@ Pages** (repo `ehriva/ehriva.com`).
 
 - `index.html` — static single-file page, no build step
 - `_redirects` — Pages redirect rules (www → apex)
+- `functions/api/waitlist.js` — waitlist endpoint (Pages Function, KV-backed)
 
 **Local preview:** `python3 -m http.server 8000`
 
