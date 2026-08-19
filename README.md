@@ -4,7 +4,7 @@
 
 Ehriva is an AI platform that deploys agents across hospital workflows — clinical
 procedure agents, EHR analytics agents, and hospital operations agents — built
-Turkish-language-native and privacy-first (KVKK / GDPR).
+evaluation-first, multilingual, and privacy-first (GDPR / KVKK).
 
 - 🌐 **Website:** https://ehriva.com
 - ✉️ **Contact:** hello@ehriva.com
@@ -23,16 +23,15 @@ One data layer feeds all three families; every agent keeps a human in the loop.
 ## Why Ehriva
 
 - **Evaluation-first** — every agent is gated on clinician-curated tasks before deployment
-- **Turkish-native** — clinical NLP built for Turkish morphology and terminology (most
-  medical AI tooling is English-first and fails here)
-- **Privacy by design** — KVKK-compliant execution, GDPR-aligned, on-prem/private-cloud
-  deployment option
+- **Multilingual** — clinical NLP core designed for multiple languages and terminologies
+- **Privacy by design** — GDPR-aligned, KVKK-compliant, on-prem/private-cloud deployment
+  option
 
 ## Founders
 
 - **Ahmet Kaplan** — Co-founder, CEO & CTO. Big data analytics, data integrations, AI
-  methods and applications; author of the MedipolSQL Turkish clinical text-to-SQL
-  benchmark. [LinkedIn](https://www.linkedin.com/in/ahmetkaplan/)
+  methods and applications; author of a published clinical text-to-SQL benchmark
+  (MedipolSQL) with clinician-curated evaluation tasks. [LinkedIn](https://www.linkedin.com/in/ahmetkaplan/)
 - **Suleyman Yıldırım** — Co-founder, Chief Medical Officer. Clinical methods,
   clinician relations, microbiotics; the bridge between AI capability and clinical
   trust. [LinkedIn](https://www.linkedin.com/in/slymnyldrm/)
