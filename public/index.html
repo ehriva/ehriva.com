@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EHRiva — From EHR data to agentic action</title>
+  <meta name="description" content="EHRiva gives care teams and hospital leaders AI agents that turn data into action: less time on admin, faster decisions, smarter plans. Built with clinicians, tested before deployment, GDPR-aligned.">
+  <meta property="og:title" content="EHRiva — From EHR data to agentic action">
+  <meta property="og:description" content="AI agents clinicians can trust: clinical workflow agents, electronic health record (EHR) analytics agents, and hospital operations agents on one platform.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ehriva.com/">
+  <meta property="og:image" content="https://ehriva.com/og.png">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="canonical" href="https://ehriva.com/">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --ink: #0b1220;
+      --muted: #55627a;
+      --blue: #1a588d;
+      --blue-dark: #123f6b;
+      --sky: #3ca9d9;
+      --sky-light: #a8d4f2;
+      --navy: #0f172a;
+      --line: #e2e8f0;
+      --card: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; max-width: 1120px; margin: 0 auto;
+    }
+    .logo { display: flex; align-items: center; gap: 11px; }
+    .logo-text { font-family: "Baskerville", "Times New Roman", serif; font-weight: 700; font-size: 23px; color: var(--ink); letter-spacing: -.01em; line-height: 1; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; margin-left: 26px; }
+    .nav-links a:hover { color: var(--blue); }
+    @media (max-width: 640px) { .nav-links a { margin-left: 14px; font-size: 13.5px; } }
+
+    /* Hero */
+    header.hero {
+      background:
+        radial-gradient(700px 340px at 88% -12%, rgba(60,169,217,.18), transparent 60%),
+        radial-gradient(520px 300px at 6% 0%, rgba(26,88,141,.35), transparent 55%),
+        var(--navy);
+      color: #f1f5f9;
+      padding: 76px 0 84px;
+    }
+    .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+    @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; gap: 36px; } }
+    .eyebrow {
+      display: inline-block; font-size: 12.5px; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--sky-light); border: 1px solid rgba(168,212,242,.4);
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5.4vw, 58px); line-height: 1.08; font-weight: 800;
+      letter-spacing: -.02em; margin-bottom: 22px;
+    }
+    .hero h1 em { font-style: normal; background: linear-gradient(90deg, #3ca9d9, #7fc3ea); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.sub { font-size: 17.5px; color: #cbd5e1; margin-bottom: 16px; }
+    .hero .trustline { font-size: 13px; color: #94a3b8; margin-bottom: 30px; letter-spacing: .02em; }
+    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 13px 26px; border-radius: 12px; font-weight: 600;
+      font-size: 15.5px; text-decoration: none; transition: transform .08s ease, box-shadow .08s ease;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 24px rgba(26,88,141,.4); }
+    .btn-primary:hover { background: var(--blue-dark); }
+    .btn-ghost { border: 1px solid rgba(148,163,184,.4); color: #e2e8f0; }
+    .btn-ghost:hover { border-color: #94a3b8; background: rgba(148,163,184,.08); }
+    .hero-illus { display: flex; justify-content: center; }
+
+    /* Stats strip */
+    .stats { border-top: 1px solid rgba(148,163,184,.2); }
+    .stats .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; padding: 22px 24px; }
+    .stat-num { font-size: 30px; font-weight: 800; color: #fff; line-height: 1.1; }
+    .stat-num span { color: var(--sky-light); }
+    .stat-label { font-size: 13.5px; color: #94a3b8; margin-top: 2px; }
+
+    /* Sections */
+    section { padding: 84px 0; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    h2 { font-size: clamp(27px, 3.8vw, 38px); font-weight: 800; letter-spacing: -.015em; margin-bottom: 14px; }
+    .lede { color: var(--muted); font-size: 17px; max-width: 660px; }
+
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 40px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+      padding: 30px; box-shadow: 0 1px 2px rgba(15,23,42,.04);
+    }
+    .icon-circle {
+      width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center;
+      background: linear-gradient(135deg, #1a588d, #3ca9d9); margin-bottom: 18px;
+    }
+    .card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+    .card .tag { font-size: 12.5px; font-weight: 700; color: var(--blue); letter-spacing: .06em; }
+    .card p { color: var(--muted); font-size: 15px; margin-bottom: 12px; }
+    .card ul { list-style: none; }
+    .card li { color: var(--muted); font-size: 14.5px; margin-bottom: 7px; padding-left: 22px; position: relative; }
+    .card li::before { content: "✓"; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
+
+    /* Steps */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 40px; }
+    .step { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px; }
+    .step .num {
+      width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff;
+      display: grid; place-items: center; font-weight: 800; font-size: 18px; margin-bottom: 16px;
+    }
+    .step h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .step p { color: var(--muted); font-size: 14.5px; }
+
+    /* Who it's for */
+    .who { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 40px; }
+    .who .card { text-align: center; padding: 34px 26px; }
+    .who .icon-circle { margin: 0 auto 16px; }
+    .who h3 { margin-bottom: 6px; }
+    .who p { margin-bottom: 0; font-size: 14.5px; }
+
+    /* Trust band */
+    .band { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .band .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; padding: 48px 24px; }
+    .band .item h4 { font-size: 16.5px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    .band .item p { color: var(--muted); font-size: 14px; }
+    .band .mini { width: 34px; height: 34px; border-radius: 10px; background: #e8f2fb; display: inline-grid; place-items: center; flex: 0 0 34px; }
+
+    /* Team */
+    .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 40px; }
+    .person { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+    .person .avatar {
+      width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
+      font-weight: 800; font-size: 21px; color: #fff; margin-bottom: 16px;
+    }
+    .person h3 { font-size: 18px; font-weight: 700; }
+    .person .role { font-size: 13.5px; color: var(--blue); font-weight: 600; margin-top: 2px; margin-bottom: 12px; }
+    .person p { color: var(--muted); font-size: 14.5px; margin-bottom: 14px; }
+    .person a { color: var(--blue); font-size: 14px; text-decoration: none; font-weight: 600; }
+    .person a:hover { text-decoration: underline; }
+
+    /* Waitlist */
+    section.waitlist { background: var(--navy); color: #e2e8f0; text-align: center; }
+    .waitlist h2 { color: #fff; }
+    .waitlist .lede { color: #94a3b8; margin: 0 auto 28px; }
+    form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; max-width: 560px; margin: 0 auto; }
+    input[type="email"] {
+      flex: 1 1 260px; padding: 13px 16px; border-radius: 12px; border: 1px solid #334155;
+      background: #1e293b; color: #f1f5f9; font-size: 15px; outline: none;
+    }
+    input[type="email"]::placeholder { color: #64748b; }
+    input[type="email"]:focus { border-color: var(--sky); }
+    .waitlist .fineprint { color: #64748b; font-size: 13px; margin-top: 16px; }
+    .waitlist .fineprint a { color: var(--sky-light); }
+
+    footer { padding: 48px 0 40px; color: var(--muted); font-size: 14px; text-align: center; }
+    footer .lockup { height: 44px; width: auto; margin-bottom: 14px; }
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--blue); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/"><img src="/ehriva.png" alt="EHRiva" style="height:34px;width:auto;"><span class="logo-text">EHRiva</span></a>
+    <div class="nav-links">
+      <a href="#platform">Platform</a>
+      <a href="#how">How it works</a>
+      <a href="#who">For whom</a>
+      <a href="#team">Team</a>
+      <a href="#waitlist">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">AI agents clinicians can trust</span>
+        <h1>From EHR data to <em>agentic action.</em></h1>
+        <p class="sub">Hospitals run on data — but most of it never reaches the people
+          who could act on it. EHRiva gives care teams and hospital leaders AI agents
+          that turn that data into action: less time on admin, faster decisions,
+          smarter plans. Built with clinicians, tested before deployment.</p>
+        <p class="trustline">GDPR-aligned &nbsp;·&nbsp; on-prem or private cloud &nbsp;·&nbsp; humans always in the loop</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#waitlist">Join the pilot waitlist</a>
+          <a class="btn btn-ghost" href="mailto:hello@ehriva.com">hello@ehriva.com</a>
+        </div>
+      </div>
+      <div class="hero-illus">
+        <svg viewBox="0 0 460 320" width="460" height="320" role="img" aria-label="Hospital data flows into AI agents, agents produce action">
+          <rect x="6" y="6" width="448" height="308" rx="24" fill="#14233f" stroke="#24324f"/>
+          <text x="230" y="44" font-family="inherit" font-size="15" font-weight="700" fill="#a8d4f2" text-anchor="middle" letter-spacing="2">DATA &nbsp;→&nbsp; AGENTS &nbsp;→&nbsp; ACTION</text>
+          <!-- data node (center 115,140) -->
+          <circle cx="115" cy="140" r="46" fill="#1a588d"/>
+          <rect x="91" y="116" width="12" height="34" rx="3" fill="#fff"/>
+          <rect x="109" y="126" width="12" height="24" rx="3" fill="#cfe6f7"/>
+          <rect x="127" y="132" width="12" height="18" rx="3" fill="#a8d4f2"/>
+          <text x="115" y="216" font-family="inherit" font-size="13.5" fill="#cbd5e1" text-anchor="middle">Hospital data</text>
+          <!-- arrow 1 -->
+          <line x1="169" y1="140" x2="215" y2="140" stroke="#3ca9d9" stroke-width="3"/>
+          <path d="M215,132 L226,140 L215,148 Z" fill="#3ca9d9"/>
+          <!-- agents (center 240,140) -->
+          <circle cx="240" cy="106" r="17" fill="#3ca9d9"/>
+          <circle cx="240" cy="140" r="17" fill="#3ca9d9"/>
+          <circle cx="240" cy="174" r="17" fill="#3ca9d9"/>
+          <text x="240" y="216" font-family="inherit" font-size="13.5" fill="#cbd5e1" text-anchor="middle">AI agents</text>
+          <!-- arrow 2 -->
+          <line x1="263" y1="140" x2="310" y2="140" stroke="#3ca9d9" stroke-width="3"/>
+          <path d="M310,132 L321,140 L310,148 Z" fill="#3ca9d9"/>
+          <!-- action (center 365,140) -->
+          <circle cx="365" cy="140" r="42" fill="#a8d4f2"/>
+          <path d="M349,140 L361,152 L382,128" fill="none" stroke="#0f172a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="365" y="216" font-family="inherit" font-size="13.5" fill="#cbd5e1" text-anchor="middle">Action</text>
+          <text x="230" y="280" font-family="inherit" font-size="12.5" fill="#64748b" text-anchor="middle">Less admin · faster decisions · smarter plans</text>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><div class="stat-num"><span>142</span></div><div class="stat-label">benchmark items built in-house</div></div>
+      <div class="stat"><div class="stat-num"><span>42</span></div><div class="stat-label">tasks written by clinicians</div></div>
+      <div class="stat"><div class="stat-num"><span>3</span></div><div class="stat-label">agent families, one data layer</div></div>
+      <div class="stat"><div class="stat-num"><span>2</span></div><div class="stat-label">hospital pilots in discussion</div></div>
+    </div>
+  </div>
+
+  <section id="platform">
+    <div class="wrap">
+      <div class="kicker">What we build</div>
+      <h2>AI agents that earn their place in your hospital</h2>
+      <p class="lede">Three agent families, one shared data layer. Every agent is tested
+        on tasks written by real clinicians before it ever touches a patient — and every
+        decision still ends with a human.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15l2 2 4-4"/></svg>
+          </div>
+          <div class="tag">CliniFlow</div>
+          <h3>Clinical procedure agents</h3>
+          <p>Agents that sit beside clinicians — drafting notes, checking protocols,
+            suggesting the next best step — so more time goes to patients, not paperwork.</p>
+          <ul>
+            <li>Ambient documentation &amp; smart order sets</li>
+            <li>Protocol checks in real time</li>
+            <li>Learns each hospital's own guidelines</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>
+          </div>
+          <div class="tag">Analytics</div>
+          <h3>EHR analytics agents</h3>
+          <p>Agents that spot what's coming — readmission, deterioration, long stays —
+            and quietly nudge the right person in time to act.</p>
+          <ul>
+            <li>Cohort discovery &amp; ICD-10 coding</li>
+            <li>Predictions that trigger action, not just charts</li>
+            <li>Research-ready, de-identified data layer</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-6h6v6"/><path d="M9 9h.01M15 9h.01M9 12h.01M15 12h.01"/></svg>
+          </div>
+          <div class="tag">Operations</div>
+          <h3>Hospital operations agents</h3>
+          <p>A "what-if" engine for hospital leaders — try adding beds, changing shifts,
+            or re-routing patient flow, and see the impact before you commit.</p>
+          <ul>
+            <li>"What if we add 20 ICU beds?" — answered</li>
+            <li>Patient flow, capacity &amp; staffing</li>
+            <li>Recommendations tracked and re-run</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="kicker">How it works</div>
+      <h2>From connect to impact, in three steps</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <h3>Connect</h3>
+          <p>We plug into the systems you already use — the electronic health record
+            (EHR), schedules, registries — and build one clean, de-identified data
+            layer. No rip-and-replace.</p>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <h3>Deploy</h3>
+          <p>You choose which agents go live. Each one is tested on real
+            clinician-written tasks first, runs in your environment, and keeps a human
+            in the loop.</p>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <h3>Measure</h3>
+          <p>Agents suggest, teams decide, results flow back. Readmissions, wait
+            times, freed capacity — visible in one place, month after month.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="who">
+    <div class="wrap">
+      <div class="kicker">For whom</div>
+      <h2>Built for the people hospitals depend on</h2>
+      <div class="who">
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Clinicians</h3>
+          <p>Less admin, fewer surprises, more time with patients — and agents that
+            explain themselves before they act.</p>
+        </div>
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"/></svg>
+          </div>
+          <h3>Hospital leaders</h3>
+          <p>Plan with confidence — see the impact of a decision before you make it,
+            and prove it with real numbers.</p>
+        </div>
+        <div class="card">
+          <div class="icon-circle">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M8 11l2 2 4-4"/></svg>
+          </div>
+          <h3>Researchers</h3>
+          <p>Ask real questions of real hospital data — safely, quickly, and at a
+            scale that used to take months.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="item">
+        <h4><span class="mini"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a588d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>Tested before it touches a patient</h4>
+        <p>Every agent is gated on tasks written by real clinicians — we only ship what
+          we can prove.</p>
+      </div>
+      <div class="item">
+        <h4><span class="mini"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a588d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg></span>Multilingual from day one</h4>
+        <p>Our clinical language core works across languages and terminologies — one
+          platform, wherever your hospital is.</p>
+      </div>
+      <div class="item">
+        <h4><span class="mini"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a588d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>Privacy by design</h4>
+        <p>GDPR-aligned, deployable on-prem or in your private cloud. Your data stays
+          yours — always.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="kicker">Founders</div>
+      <h2>Built by an engineer and a clinician</h2>
+      <p class="lede">Headquartered in Istanbul, building for hospitals worldwide —
+        starting with the two people who started EHRiva.</p>
+      <div class="team">
+        <div class="person">
+          <div class="avatar" style="background:linear-gradient(135deg,#1a588d,#3ca9d9)">AK</div>
+          <h3>Ahmet Kaplan</h3>
+          <div class="role">Co-founder · CEO &amp; CTO</div>
+          <p>Ahmet lives in data. Big data, integrations, AI — he built the clinical
+            text-to-SQL benchmark (paper in review at IEEE JBHI) that teaches our
+            agents to understand hospital data.</p>
+          <a href="https://www.linkedin.com/in/ahmetkaplan/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+        </div>
+        <div class="person">
+          <div class="avatar" style="background:linear-gradient(135deg,#123f6b,#1a588d)">SY</div>
+          <h3>Suleyman Yıldırım</h3>
+          <div class="role">Co-founder · Chief Medical Officer</div>
+          <p>Suleyman works where care happens — with clinicians every day. Clinical
+            methods and microbiology are his home turf; he makes sure every agent
+            earns the trust it asks for.</p>
+          <a href="https://www.linkedin.com/in/slymnyldrm/" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="wrap">
+      <div class="kicker" style="color:#a8d4f2">Get in touch</div>
+      <h2>We're piloting with a small number of hospitals</h2>
+      <p class="lede">Join the waitlist — hospitals, clinicians, researchers, and
+        partners welcome. We reply personally.</p>
+      <form id="waitlist-form">
+        <input type="email" name="email" placeholder="you@hospital.org" required>
+        <button class="btn btn-primary" type="submit">Notify me</button>
+      </form>
+      <p id="form-status" class="fineprint"></p>
+      <p class="fineprint">Or email <a href="mailto:hello@ehriva.com">hello@ehriva.com</a>
+        · © 2026 EHRiva · <a href="https://github.com/ehriva" target="_blank" rel="noopener">GitHub</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <img class="lockup" src="/ehriva-logo-slogan.png" alt="EHRiva — from EHR data to agentic action">
+      <div>© 2026 EHRiva — from EHR data to agentic action.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Waitlist — posts to the Cloudflare Pages Function (functions/api/waitlist.js).
+    // If the API is unreachable (e.g., previewing the file locally), it falls back
+    // to a pre-filled email so no lead is ever lost.
+    const wlForm = document.getElementById('waitlist-form');
+    const wlStatus = document.getElementById('form-status');
+    wlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = wlForm.email.value.trim();
+      wlStatus.textContent = 'Submitting…';
+      try {
+        const res = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json().catch(() => null);
+        if (data && data.ok) {
+          wlStatus.textContent = '✓ ' + (data.message || 'You are on the list.');
+          wlForm.reset();
+        } else if (res.status === 404) {
+          // Function not deployed — fall back to email so the lead is kept
+          wlStatus.textContent = '✗ Waitlist service not live yet — opening email…';
+          window.location.href = 'mailto:hello@ehriva.com?subject=' + encodeURIComponent('EHRiva waitlist') + '&body=' + encodeURIComponent('Please add me to the pilot waitlist.\n\nEmail: ' + email);
+        } else {
+          wlStatus.textContent = '✗ ' + ((data && data.error) || 'Please try again, or email hello@ehriva.com');
+        }
+      } catch (err) {
+        wlStatus.textContent = '✗ Service unreachable — opening email instead…';
+        window.location.href = 'mailto:hello@ehriva.com?subject=' + encodeURIComponent('EHRiva waitlist') + '&body=' + encodeURIComponent('Please add me to the pilot waitlist.\n\nEmail: ' + email);
+      }
+    });
+  </script>
+
+</body>
+</html>
