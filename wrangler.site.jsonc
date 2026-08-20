@@ -5,5 +5,8 @@
   "assets": {
     "directory": "./public",
     "not_found_handling": "single-page-application"
-  }
+  },
+  "routes": [
+    { "pattern": "ehriva.com/*", "zone_name": "ehriva.com" }
+  ]
 }
