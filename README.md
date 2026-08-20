@@ -5,7 +5,7 @@
 **From EHR data to agentic action.**
 
 EHRiva is an AI platform that deploys agents across hospital workflows — clinical
-procedure agents, electronic health record (EHR) analytics agents, and hospital operations agents — built
+procedure agents and electronic health record (EHR) analytics agents — built
 evaluation-first, multilingual, and privacy-first (GDPR).
 
 - 🌐 **Website:** https://ehriva.com
@@ -18,7 +18,6 @@ evaluation-first, multilingual, and privacy-first (GDPR).
 |---|---|---|
 | **Clinical procedure agents** | CliniFlow | Documentation, smart order sets, protocol-adherence checks, decision support — embedded in the clinician's existing workflow |
 | **EHR analytics agents** | Analytics | Cohort discovery, ICD-10 coding, readmission / deterioration / length-of-stay prediction that nudges the right care team at the right time |
-| **Hospital operations agents** | Operations | "What-if" capacity, patient-flow and staffing simulation with monitored, re-simulated recommendations |
 
 One data layer feeds all three families; every agent keeps a human in the loop.
 
