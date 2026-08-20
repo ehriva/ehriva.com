@@ -7,6 +7,6 @@
     "not_found_handling": "single-page-application"
   },
   "routes": [
-    { "pattern": "ehriva.com/*", "zone_name": "ehriva.com" }
+    { "pattern": "ehriva.com", "custom_domain": true, "zone_name": "ehriva.com" }
   ]
 }
