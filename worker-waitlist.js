@@ -1,4 +1,4 @@
-// EHRiva waitlist - standalone Cloudflare Worker (fallback if Pages Functions 404).
+// EHRiva waitlist, standalone Cloudflare Worker (fallback if Pages Functions 404).
 //
 // Deploy (dashboard, ~2 min):
 //   1. Workers & Pages -> Create -> Worker -> name: ehriva-waitlist -> Edit code
@@ -34,7 +34,7 @@ export default {
           const key = `waitlist:${ts}:${Math.random().toString(36).slice(2, 8)}`;
           await env.WAITLIST.put(key, JSON.stringify({ email, org, ts }));
         }
-        return json({ ok: true, message: "You're on the list - thank you!" });
+        return json({ ok: true, message: "You're on the list, thank you!" });
       } catch (err) {
         return json({ ok: false, error: "Something went wrong. Please try again." }, 500);
       }

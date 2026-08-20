@@ -63,7 +63,7 @@ async function main() {
   }
   rows.sort((a, b) => (a.ts || "").localeCompare(b.ts || ""));
 
-  // 3. write CSV + JSON (never commit these - they contain emails)
+  // 3. write CSV + JSON (never commit these, they contain emails)
   const outDir = path.join(__dirname, "..", "exports");
   fs.mkdirSync(outDir, { recursive: true });
   const stamp = new Date().toISOString().slice(0, 10);

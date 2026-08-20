@@ -1,10 +1,10 @@
-# Deployment - EHRiva (actual setup, updated Aug 20, 2026)
+# Deployment, EHRiva (actual setup, updated Aug 20, 2026)
 
-Internal ops doc (not shown on the repo front page - README.md is the public one).
+Internal ops doc (not shown on the repo front page, README.md is the public one).
 
 ## Reality check: the site runs on a Worker, not Pages
 
-- The static site is the Cloudflare Worker **`ehriva-com`** - a **Workers Static
+- The static site is the Cloudflare Worker **`ehriva-com`**, a **Workers Static
   Assets** worker deployed from `public/` via `wrangler.site.jsonc`. Attached to the
   custom domain `ehriva.com` (and a zone route `ehriva.com/*`).
 - The waitlist is a **separate Worker `ehriva-waitlist`** on the zone route
@@ -14,22 +14,22 @@ Internal ops doc (not shown on the repo front page - README.md is the public one
 
 ## ⚠️ History / warning
 
-On Aug 19–20 the site worker (`ehriva-com`) was **overwritten with the waitlist code**
-(versions uploaded ~22:50–23:09 UTC) - every request then returned waitlist JSON.
+On Aug 19 to 20 the site worker (`ehriva-com`) was **overwritten with the waitlist code**
+(versions uploaded ~22:50 to 23:09 UTC), every request then returned waitlist JSON.
 Fixed by redeploying `ehriva-com` as a static-assets worker. **Never deploy
-`worker-waitlist.js` to `ehriva-com`** - the waitlist lives only on `ehriva-waitlist`.
+`worker-waitlist.js` to `ehriva-com`**, the waitlist lives only on `ehriva-waitlist`.
 
-## Site worker - update the live site
+## Site worker, update the live site
 
 ```bash
 cp <new files> public/        # index.html, ehriva.png, ... (see public/)
 npx wrangler deploy --config wrangler.site.jsonc   # from ehriva-site/
 ```
 
-The site Worker does **not** auto-deploy from GitHub pushes - run the command above
+The site Worker does **not** auto-deploy from GitHub pushes, run the command above
 (or set up Workers Builds CI) after each site change.
 
-## Waitlist worker - deploy & config
+## Waitlist worker, deploy & config
 
 Config: `wrangler.jsonc` (name `ehriva-waitlist`, main `worker-waitlist.js`,
 KV binding `WAITLIST`, route `ehriva.com/api/*`).
