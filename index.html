@@ -112,6 +112,9 @@
     .card ul { list-style: none; }
     .card li { color: var(--muted); font-size: 14.5px; margin-bottom: 7px; padding-left: 22px; position: relative; }
     .card li::before { content: "✓"; position: absolute; left: 0; color: var(--sky); font-weight: 700; }
+    .card .link { margin-top: 14px; }
+    .card a { color: var(--blue); font-size: 13.5px; font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
 
     /* Steps */
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 40px; }
@@ -284,7 +287,7 @@
           </div>
           <div class="tag">Research</div>
           <h3>Multimodal research platform</h3>
-          <p>Researchers ask questions in natural language and get the data they need , 
+          <p>Researchers ask questions in natural language and get the data they need:
             EHR, lab results, and medical images assembled together, ready for analysis
             or model training.</p>
           <ul>
@@ -292,6 +295,7 @@
             <li>EHR + lab + imaging datasets, de-identified</li>
             <li>Secure AI research environment (GPU-ready)</li>
           </ul>
+          <p class="link"><a href="https://github.com/ehriva/OMOPIntegration" target="_blank" rel="noopener">See the OMOP integration pipeline (Pusula to OMOP CDM v5.4)</a></p>
         </div>
       </div>
     </div>
