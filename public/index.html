@@ -47,7 +47,16 @@
     .logo-text { font-family: "Baskerville", "Times New Roman", serif; font-weight: 700; font-size: 23px; color: var(--ink); letter-spacing: -.01em; line-height: 1; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14.5px; margin-left: 26px; }
     .nav-links a:hover { color: var(--blue); }
-    @media (max-width: 640px) { .nav-links a { margin-left: 14px; font-size: 13.5px; } }
+    @media (max-width: 640px) {
+      nav { flex-wrap: wrap; gap: 10px 0; }
+      .nav-links { width: 100%; display: flex; justify-content: space-between; }
+      .nav-links a { margin-left: 0; font-size: 13.5px; }
+      .wrap { padding: 0 16px; }
+      .hero { padding: 48px 0 56px; }
+      .hero .wrap { gap: 24px; }
+      .btn { width: 100%; text-align: center; }
+      section { padding: 56px 0; }
+    }
 
     /* Hero */
     header.hero {
@@ -83,10 +92,12 @@
     .btn-ghost { border: 1px solid rgba(148,163,184,.4); color: #e2e8f0; }
     .btn-ghost:hover { border-color: #94a3b8; background: rgba(148,163,184,.08); }
     .hero-illus { display: flex; justify-content: center; }
+    img, svg { max-width: 100%; }
+    .hero-illus svg { height: auto; }
 
     /* Stats strip */
     .stats { border-top: 1px solid rgba(148,163,184,.2); }
-    .stats .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; padding: 22px 24px; }
+    .stats .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 14px; padding: 22px 24px; }
     .stat-num { font-size: 30px; font-weight: 800; color: #fff; line-height: 1.1; }
     .stat-num span { color: var(--sky-light); }
     .stat-label { font-size: 13.5px; color: #94a3b8; margin-top: 2px; }
@@ -97,7 +108,7 @@
     h2 { font-size: clamp(27px, 3.8vw, 38px); font-weight: 800; letter-spacing: -.015em; margin-bottom: 14px; }
     .lede { color: var(--muted); font-size: 17px; max-width: 660px; }
 
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 40px; }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 22px; margin-top: 40px; }
     .card {
       background: var(--card); border: 1px solid var(--line); border-radius: 18px;
       padding: 30px; box-shadow: 0 1px 2px rgba(15,23,42,.04);
@@ -117,7 +128,7 @@
     .card a:hover { text-decoration: underline; }
 
     /* Steps */
-    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 40px; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 22px; margin-top: 40px; }
     .step { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 30px; }
     .step .num {
       width: 42px; height: 42px; border-radius: 50%; background: var(--blue); color: #fff;
@@ -127,7 +138,7 @@
     .step p { color: var(--muted); font-size: 14.5px; }
 
     /* Who it's for */
-    .who { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; margin-top: 40px; }
+    .who { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 22px; margin-top: 40px; }
     .who .card { text-align: center; padding: 34px 26px; }
     .who .icon-circle { margin: 0 auto 16px; }
     .who h3 { margin-bottom: 6px; }
@@ -135,13 +146,13 @@
 
     /* Trust band */
     .band { background: #fff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .band .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; padding: 48px 24px; }
+    .band .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 26px; padding: 48px 24px; }
     .band .item h4 { font-size: 16.5px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
     .band .item p { color: var(--muted); font-size: 14px; }
     .band .mini { width: 34px; height: 34px; border-radius: 10px; background: #e8f2fb; display: inline-grid; place-items: center; flex: 0 0 34px; }
 
     /* Team */
-    .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 40px; }
+    .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 22px; margin-top: 40px; }
     .person { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
     .person .avatar {
       width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center;
